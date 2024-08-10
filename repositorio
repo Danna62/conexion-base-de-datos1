@@ -1,0 +1,71 @@
+*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package conexion.base.de.datos.pkg1;
+
+/**
+ *
+ * @author lenovo
+ */
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+public class ConexionBaseDeDatos1 {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args, Statement Statement) {
+       String Registro=("root");
+       String password="";
+       String url="jdbc:mysql://localhost:3306/jdbc";
+        Connection conexion;
+        Statement statement = null;
+        ResultSet rs = null;
+        // consulta
+        try {
+            conexion=DriverManager.getConnection(url, Registro, password);
+            Statement =conexion.createStatement();
+            rs= statement.executeQuery("Select* FROM `registro`");
+            while(rs.next());
+                System.out.println("Nombres, apellidos,correo electronico , contraseña");
+       
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionBaseDeDatos1.class.getName()).log(Level.SEVERE, null, ex);
+            
+            
+           try {
+               // Insercion de datos
+               Statement.execute("INSERT INTO `registro` (`Registro`, `Nombres:`, `Apellidos:`, `Correo electronico:`, `Contraseña:`) VALUES ('', 'Danna', '', '', '');");
+               rs=statement.executeQuery("Select* FROM `registro`");
+            while(rs.next());
+                System.out.println("Nombres, apellidos,correo electronico , contraseña");
+                
+                //Actualizacion de datos
+                Statement.execute("UPDATE `registro` SET `Nombres:` = 'Dora' WHERE `registro`.`Registro` = 0;");
+                System.out.println("");
+                rs=statement.executeQuery("Select* FROM `registro`");
+            while(rs.next());
+                System.out.println( rs.getString("Nombres, apellidos,correo electronico , contraseña"));
+                
+                // Eliminacion 
+                 Statement.execute("DELETE FROM registro WHERE `registro`.`Registro` = 0\"?");
+                System.out.println("");
+                rs=statement.executeQuery("Select* FROM `registro`");
+            while(rs.next());
+                System.out.println( rs.getString("Nombres, apellidos,correo electronico , contraseña"));
+                
+                
+                
+                
+           } catch (SQLException ex1) {
+               Logger.getLogger(ConexionBaseDeDatos1.class.getName()).log(Level.SEVERE, null, ex1);
+           }
+        }
+       
+       
+        
+    }
+    
+}
